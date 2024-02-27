@@ -74,7 +74,7 @@ const Index = () => {
               </Stack>
             </Flex>
           </Container>
-          <Divider borderWidth={2} style={{ background: "linear-gradient(to right, #ff0080, #ff8c00, #ffeb3b, #b2ff59, #00e5ff, #d500f9)" }} />
+          <Divider borderWidth={2} style={{ background: "linear-gradient(to right, #e74c3c, #e67e22, #f1c40f, #2ecc71, #3498db, #9b59b6)" }} />
           <Text textAlign="center" py={2} bg={useColorModeValue("gray.800", "gray.700")}>
             Discover the future of technology today and be part of the conversation that shapes our tomorrow.
           </Text>
