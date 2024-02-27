@@ -8,7 +8,6 @@ const Index = () => {
   const [posts, setPosts] = useState([]);
   const [likes, setLikes] = useState({});
   const [searchText, setSearchText] = useState("");
-  const [cookieConsentVisible, setCookieConsentVisible] = useState(true);
   const toast = useToast();
 
   // Fetch posts from HackerNews API
@@ -65,13 +64,13 @@ const Index = () => {
     <ChakraProvider>
       <Box bg={useColorModeValue("gray.100", "gray.900")} minH="100vh">
         {/* Header */}
-        <Box bg="linear-gradient(to right, #ff0080, #ff8c00, #40ff00, #1c8c00, #00ff99, #0040ff)" color="white">
+        <Box bg={useColorModeValue("gray.800", "gray.700")} color="white">
           <Container maxW="940px">
             <Flex justify="space-between" align="center" py={4}>
               <Heading size="md">SheldonNews</Heading>
               <Stack direction="row" spacing={3}>
-                <IconButton icon={<FaMoon />} onClick={toggleColorMode} variant="ghost" aria-label="Toggle dark mode" color="white" />
-                <IconButton icon={<FaRedo />} onClick={fetchPosts} variant="ghost" aria-label="Refresh posts" color="white" />
+                <IconButton icon={colorMode === "light" ? <FaMoon /> : <FaSun />} onClick={toggleColorMode} variant="ghost" aria-label="Toggle dark mode" />
+                <IconButton icon={<FaRedo />} onClick={fetchPosts} variant="ghost" aria-label="Refresh posts" />
               </Stack>
             </Flex>
           </Container>
@@ -101,25 +100,26 @@ const Index = () => {
         </Container>
 
         {/* PostList */}
-        <SimpleGrid columns={{ sm: 1, md: 3 }} spacing={10} mb={8}>
-          {filteredPosts.slice(0, 3).map((post) => (
-            <Box key={post.id} bg={useColorModeValue("white", "gray.800")} p={5} shadow="md" borderRadius="md">
-              <Image src={fetchImage(post.title)} alt="Post image" />
-              <Heading size="md" mt={2}>
-                {post.title}
-              </Heading>
-              <Flex justify="space-between" align="center" mt={2}>
-                <Text fontSize="sm">{new Date(post.time * 1000).toLocaleDateString()}</Text>
-                <IconButton icon={<FaHeart />} variant="ghost" color={likes[post.id] ? "red.400" : undefined} onClick={() => toggleLike(post.id)} aria-label="Like post" />
-              </Flex>
-            </Box>
-          ))}
-        </SimpleGrid>
-        {/* Removed Container that was incorrectly wrapping the SimpleGrid */}
+        <Container maxW="940px" py={8}>
+          <SimpleGrid columns={{ sm: 1, md: 3 }} spacing={10}>
+            {filteredPosts.map((post) => (
+              <Box key={post.id} bg={useColorModeValue("white", "gray.800")} p={5} shadow="md" borderRadius="md">
+                <Image src={fetchImage(post.title)} alt="Post image" />
+                <Heading size="md" mt={2}>
+                  {post.title}
+                </Heading>
+                <Flex justify="space-between" align="center" mt={2}>
+                  <Text fontSize="sm">{new Date(post.time * 1000).toLocaleDateString()}</Text>
+                  <IconButton icon={<FaHeart />} variant="ghost" color={likes[post.id] ? "red.400" : undefined} onClick={() => toggleLike(post.id)} aria-label="Like post" />
+                </Flex>
+              </Box>
+            ))}
+          </SimpleGrid>
+        </Container>
 
         {/* EmailOptin */}
-        <Container maxW="100%" py={8} bg="#005ce6" mt={-10} position="relative" zIndex={1}>
-          <VStack p={5} borderRadius="md" spacing={4}>
+        <Container maxW="940px" py={8}>
+          <VStack bg="#005ce6" p={5} borderRadius="md" spacing={4}>
             <Heading size="md" color="white">
               Join our Newsletter 🌟
             </Heading>
@@ -146,18 +146,9 @@ const Index = () => {
         </Box>
 
         {/* CookieConsent */}
-        <Flex position="fixed" bottom="0" left="0" right="0" p={4} justifyContent="center" bg={useColorModeValue("gray.800", "gray.700")} color="white" display={cookieConsentVisible ? "flex" : "none"}>
+        <Flex position="fixed" bottom="0" left="0" right="0" p={4} justifyContent="center" bg={useColorModeValue("gray.800", "gray.700")} color="white">
           <Text fontSize="sm">We use cookies to ensure you get the best experience on our website.</Text>
-          <Button
-            ml={4}
-            bg="#005ce6"
-            color="white"
-            _hover={{ bg: "blue.700" }}
-            onClick={() => {
-              setCookieConsentVisible(false);
-              toast({ title: "Cookies accepted", status: "success", duration: 3000, isClosable: true });
-            }}
-          >
+          <Button ml={4} bg="#005ce6" color="white" _hover={{ bg: "blue.700" }} onClick={() => toast({ title: "Cookies accepted", status: "success", duration: 3000, isClosable: true })}>
             Accept
           </Button>
         </Flex>
