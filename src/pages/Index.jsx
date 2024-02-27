@@ -64,17 +64,17 @@ const Index = () => {
     <ChakraProvider>
       <Box bg={useColorModeValue("gray.100", "gray.900")} minH="100vh">
         {/* Header */}
-        <Box bg={useColorModeValue("gray.800", "gray.700")} color="white">
+        <Box bg={useColorModeValue("gray.800", "gray.700")}>
           <Container maxW="940px">
             <Flex justify="space-between" align="center" py={4}>
               <Heading size="md">SheldonNews</Heading>
               <Stack direction="row" spacing={3}>
-                <IconButton icon={colorMode === "light" ? <FaMoon /> : <FaSun />} onClick={toggleColorMode} variant="ghost" aria-label="Toggle dark mode" />
-                <IconButton icon={<FaRedo />} onClick={fetchPosts} variant="ghost" aria-label="Refresh posts" />
+                <IconButton icon={colorMode === "light" ? <FaMoon color="white" /> : <FaSun color="white" />} onClick={toggleColorMode} variant="ghost" aria-label="Toggle dark mode" />
+                <IconButton icon={<FaRedo color="white" />} onClick={fetchPosts} variant="ghost" aria-label="Refresh posts" />
               </Stack>
             </Flex>
           </Container>
-          <Divider borderColor="blue.400" borderWidth={2} />
+          <Divider borderWidth={2} style={{ background: "linear-gradient(to right, #e66465, #9198e5, #42e695, #30d5c8, #f7ea00, #f76b8a)" }} />
           <Text textAlign="center" py={2} bg={useColorModeValue("gray.800", "gray.700")}>
             Discover the future of technology today and be part of the conversation that shapes our tomorrow.
           </Text>
