@@ -64,7 +64,7 @@ const Index = () => {
     <ChakraProvider>
       <Box bg={useColorModeValue("gray.100", "gray.900")} minH="100vh">
         {/* Header */}
-        <Box bg={useColorModeValue("gray.800", "gray.700")}>
+        <Box bg={useColorModeValue("gray.800", "gray.700")} color="white">
           <Container maxW="940px">
             <Flex justify="space-between" align="center" py={4}>
               <Heading size="md">SheldonNews</Heading>
@@ -74,7 +74,7 @@ const Index = () => {
               </Stack>
             </Flex>
           </Container>
-          <Divider borderWidth={2} style={{ background: "linear-gradient(to right, #e66465, #9198e5, #42e695, #30d5c8, #f7ea00, #f76b8a)" }} />
+          <Divider borderWidth={2} style={{ background: "linear-gradient(to right, #ff0080, #ff8c00, #ffeb3b, #b2ff59, #00e5ff, #d500f9)" }} />
           <Text textAlign="center" py={2} bg={useColorModeValue("gray.800", "gray.700")}>
             Discover the future of technology today and be part of the conversation that shapes our tomorrow.
           </Text>
